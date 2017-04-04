@@ -1,0 +1,12 @@
+*.csproj
+*.suo
+
+/Library
+/obj
+/Build
+/Documents
+/Temp
+
+/Assets/Tools/Map Creation/Meshes
+/Assets/Game/GameScreens/Resources/Screens/*
+/Assets/Game/GameScreens/Pathfinding/Resources
