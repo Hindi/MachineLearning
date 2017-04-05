@@ -5,7 +5,11 @@ using UnityEngine;
 public class Population : MonoBehaviour
 {
     List<GenomeOwner> genomeOwners = new List<GenomeOwner>();
+
+    [SerializeField]
+    private GameObject genomeOwnerPrefab;
     
+    [SerializeField]
     private int numberOfIndividuals;
 
     [SerializeField]
@@ -16,9 +20,14 @@ public class Population : MonoBehaviour
     
     protected float meanFitness;
 
-    public void registerGenomeOwner(GenomeOwner owner)
+    public void createNewPopulation(Vector2 worldSize)
     {
-        genomeOwners.Add(owner);
+        for(int i = 0; i < numberOfIndividuals; ++i)
+        {
+            float posX = Random.Range(0, worldSize.x);
+            float posY = Random.Range(0, worldSize.y);
+            genomeOwners.Add(Instantiate(genomeOwnerPrefab, new Vector3(posX, 0, posY), Quaternion.identity).GetComponent<GenomeOwner>());
+        }
     }
 
     public void createNewGeneration()

@@ -22,7 +22,6 @@ public abstract class GenomeOwner : MonoBehaviour
     void Awake()
     {
         initializeGenome();
-        population.registerGenomeOwner(this);
     }
 
     public void updateFitness()

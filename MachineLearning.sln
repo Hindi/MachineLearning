@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineLearning", "MachineLearning.csproj", "{AA78E2F7-C2B2-A070-D9D7-4B3260DCC6EC}"
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineLearning.CSharp", "MachineLearning.CSharp.csproj", "{86C36403-8630-34C8-9C2C-73C659D22BD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AA78E2F7-C2B2-A070-D9D7-4B3260DCC6EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA78E2F7-C2B2-A070-D9D7-4B3260DCC6EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA78E2F7-C2B2-A070-D9D7-4B3260DCC6EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA78E2F7-C2B2-A070-D9D7-4B3260DCC6EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86C36403-8630-34C8-9C2C-73C659D22BD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86C36403-8630-34C8-9C2C-73C659D22BD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86C36403-8630-34C8-9C2C-73C659D22BD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86C36403-8630-34C8-9C2C-73C659D22BD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
