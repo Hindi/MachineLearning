@@ -74,6 +74,7 @@ public class Population : MonoBehaviour
         foreach (GenomeOwner genome in genomeOwners)
         {
             genome.Genome.mutate(mutationProbability);
+            genome.reset();
         }
     }
     

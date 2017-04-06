@@ -28,6 +28,11 @@ public class FoodManager : MonoBehaviour
         return newFood;
     }
 
+    public override void reset()
+    {
+
+    }
+
     public void spawnInitialFoodBatch(Vector2 nWordSize)
     {
         wordSize = nWordSize;

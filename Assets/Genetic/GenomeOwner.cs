@@ -19,10 +19,11 @@ public abstract class GenomeOwner : MonoBehaviour
         }
     }
 
-    void Awake()
+    protected virtual void Awake()
     {
         initializeGenome();
     }
+
 
     public void updateFitness()
     {
@@ -31,4 +32,5 @@ public abstract class GenomeOwner : MonoBehaviour
 
     protected abstract float calculateFitness();
     protected abstract void initializeGenome();
+    public abstract void reset();
 }

@@ -20,13 +20,26 @@ public class FoodSeeker : GenomeOwner
 
     private float movementSpeed;
 
+    private int foodEaten;
+    
+    private Vector3 randomPosition;
+    private World world;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        world = GameObject.FindGameObjectWithTag("World").GetComponent<World>();
+        randomPosition = getRandomPositionInWorld();
+        foodEaten = 0;
+    }
+
     protected override void initializeGenome()
     {
         Genome = new GenomeBux();
 
         currentFoodLikeliness = Random.Range(minFoodLikeliness, maxFoodLikeliness);
         detectionRadius = Random.Range(minDetectionRadius, maxDetectionRadius);
-        movementSpeed = 100;
+        movementSpeed = 400;
 
         Genome.Genes.Add(new Gene(currentFoodLikeliness, minFoodLikeliness, maxFoodLikeliness, varFoodLikeliness));
         Genome.Genes.Add(new Gene(currentFoodLikeliness, minDetectionRadius, maxDetectionRadius, varDetectionRadius));
@@ -36,11 +49,7 @@ public class FoodSeeker : GenomeOwner
 
     protected override float calculateFitness()
     {
-        float fitness = 0;
-        fitness += (0.3f - (Genome.Genes[0].Value) * 0.3f);
-        fitness += (0.3f - (Genome.Genes[1].Value) * 0.3f);
-        fitness += (0.3f - (Genome.Genes[2].Value) * 0.3f);
-        return fitness;
+        return foodEaten;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -48,15 +57,20 @@ public class FoodSeeker : GenomeOwner
         if (collision.gameObject.tag == "Food")
         {
             collision.gameObject.GetComponent<Food>().eat();
-
+            foodEaten++;
         }
+    }
+
+    private Vector3 getRandomPositionInWorld()
+    {
+        return world.getRandomPositionInWorld();
     }
 
     void Update()
     {
-        float randomRotation = 0;
         bool hasInterestInFood = Random.Range(0.0f, 1.0f) < currentFoodLikeliness;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
+        int layerMask = 1 << 8;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, layerMask);
 
         if (hasInterestInFood && colliders.Length > 0)
         {
@@ -75,14 +89,15 @@ public class FoodSeeker : GenomeOwner
                 }
             }
 
-            transform.LookAt(new Vector3(closestFood.transform.position.x, transform.position.y, closestFood.transform.position.z));
+            transform.rotation = Quaternion.LookRotation(closestFood.transform.position - transform.position);
+            //transform.LookAt(new Vector3(closestFood.transform.position.x, transform.position.y, closestFood.transform.position.z));
         }
         else
         {
-            randomRotation = Random.Range(0.0f, 0.1f);
+            if (Vector3.Distance(transform.position, randomPosition) < 0.5f)
+                randomPosition = getRandomPositionInWorld();
+            transform.rotation = Quaternion.LookRotation(randomPosition - transform.position);
         }
-        transform.Rotate(transform.rotation.x, transform.rotation.y + randomRotation, transform.rotation.z);
         GetComponent<Rigidbody>().velocity = transform.forward * movementSpeed * Time.deltaTime;
-        Debug.Log(transform.forward);
     }
 }
